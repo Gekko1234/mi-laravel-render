@@ -8,7 +8,7 @@ use App\Http\Controllers\AveriaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\TecnicoController;
-
+use Illuminate\Support\Facades\Artisan;
 
 
 
@@ -86,6 +86,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/{id}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+});
+
+
+Route::get('/run-key', function () {
+    Artisan::call('key:generate');
+    return 'APP_KEY generado.';
 });
 
 
