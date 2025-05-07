@@ -9,7 +9,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('equipo.create') }}" class="btn btn-primary mb-3">Crear nuevo equipo</a>
+    <a href="{{ route('equipo.create') }}" class="btn btn-success mb-3">Crear nuevo equipo</a>
 
     <table class="table table-bordered">
         <thead>

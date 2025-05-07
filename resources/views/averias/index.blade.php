@@ -9,6 +9,8 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <a href="{{ route('averias.create') }}" class="btn btn-success mb-3">Crear nueva averia</a>
+
     <table class="table table-bordered">
         <thead>
             <tr>
