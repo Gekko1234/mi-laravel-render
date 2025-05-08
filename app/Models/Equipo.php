@@ -10,7 +10,7 @@ class Equipo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion', 'marca', 'modelo', 'numero_serie', 'fecha_adquisicion', 'estado', 'ubicacion',' aula_id',];
+    protected $fillable = ['nombre', 'descripcion', 'marca', 'modelo', 'numero_serie', 'fecha_adquisicion', 'estado',];
 
     // Relación con Prestamos
     public function prestamos()
@@ -24,10 +24,5 @@ class Equipo extends Model
         return $this->hasMany(Averia::class);
     }
 
-    // Relación con el aula
-    public function aula()
-    {
-        return $this->belongsTo(Aula::class);
-    }
 }
 

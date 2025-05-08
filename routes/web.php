@@ -10,8 +10,7 @@ use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\TecnicoController;
 
 
-
-// Ruta principal
+// Ruta principal / LANDING
 Route::get('/', function () {
     return view('welcome');
 });
@@ -66,9 +65,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/equipo', [EquipoController::class, 'index'])->name('equipo.index');
     Route::get('/equipo/create', [EquipoController::class, 'create'])->name('equipo.create');
     Route::post('/equipo', [EquipoController::class, 'store'])->name('equipo.store');
+    Route::get('/equipo/{id}', [EquipoController::class, 'show'])->name('equipo.show');
     Route::get('/equipo/{id}/edit', [EquipoController::class, 'edit'])->name('equipo.edit');
     Route::put('/equipo/{id}', [EquipoController::class, 'update'])->name('equipo.update');
     Route::delete('/equipo/{id}', [EquipoController::class, 'destroy'])->name('equipo.destroy');
+
 
     // Rutas de Préstamos
     Route::get('/prestamos', [PrestamoController::class, 'index'])->name('prestamos.index');
@@ -85,4 +86,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/{id}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+
 });

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
-use App\Models\Aula;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -11,15 +10,14 @@ class EquipoController extends Controller
     // Mostrar lista de equipos
     public function index()
     {
-        $equipos = Equipo::with('aula')->get(); // Incluye relación con Aula
+        $equipos = Equipo::all(); // Se obtiene la lista de equipos sin la relación a "aula"
         return view('equipo.index', compact('equipos'));
     }
 
-    // Mostrar formulario para crear equipo
+    // Mostrar formulario de creación
     public function create()
     {
-        $aulas = Aula::all();
-        return view('equipo.create', compact('aulas'));
+        return view('equipo.create'); // Aquí puedes mostrar la vista para crear un equipo
     }
 
     // Almacenar nuevo equipo
@@ -32,8 +30,8 @@ class EquipoController extends Controller
             'numero_serie' => 'nullable|string|max:255',
             'fecha_adquisicion' => 'nullable|date',
             'estado' => 'required|string|max:100',
-            'aula_id' => 'required|exists:aulas,id',
         ]);
+        
 
         Equipo::create($request->all());
 
@@ -43,16 +41,8 @@ class EquipoController extends Controller
     // Mostrar un equipo específico
     public function show($id)
     {
-        $equipo = Equipo::with('aula')->findOrFail($id);
+        $equipo = Equipo::findOrFail($id); // Ya no se hace uso de la relación 'aula'
         return view('equipo.show', compact('equipo'));
-    }
-
-    // Mostrar formulario para editar equipo
-    public function edit($id)
-    {
-        $equipo = Equipo::findOrFail($id);
-        $aulas = Aula::all();
-        return view('equipo.edit', compact('equipo', 'aulas'));
     }
 
     // Actualizar equipo
@@ -65,8 +55,8 @@ class EquipoController extends Controller
             'numero_serie' => 'nullable|string|max:255',
             'fecha_adquisicion' => 'nullable|date',
             'estado' => 'required|string|max:100',
-            'aula_id' => 'required|exists:aulas,id',
         ]);
+        
 
         $equipo = Equipo::findOrFail($id);
         $equipo->update($request->all());

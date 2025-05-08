@@ -19,7 +19,6 @@ return new class extends Migration
         $table->string('numero_serie');
         $table->date('fecha_adquisicion');
         $table->enum('estado', ['Disponible', 'En uso', 'En reparación', 'Dado de baja']);
-        $table->string('ubicacion');
         $table->timestamps();
     });
 }

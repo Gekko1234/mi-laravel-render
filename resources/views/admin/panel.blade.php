@@ -63,6 +63,7 @@
                 </div>
             </div>
 
+
             {{-- SOLO PARA ADMINISTRADORES --}}
             @if(Auth::user()->es_admin)
                 <div class="col-md-3 mb-4">
@@ -86,6 +87,8 @@
                         </div>
                     </div>
                 </div>
+
+            
             @endif
 
             {{-- Crear Avería, Prestamo, Equipo (permitido a profesores también) --}}

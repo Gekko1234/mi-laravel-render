@@ -47,17 +47,6 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="aula_id" class="form-label">Aula</label>
-            <select name="aula_id" id="aula_id" class="form-select" required>
-                <option value="">Selecciona un aula</option>
-                @foreach($aulas as $aula)
-                    <option value="{{ $aula->id }}" {{ old('aula_id') == $aula->id ? 'selected' : '' }}>
-                        {{ $aula->nombre }} ({{ $aula->ala }} - Planta {{ $aula->planta }})
-                    </option>
-                @endforeach
-            </select>
-        </div>
 
         <button type="submit" class="btn btn-success">Crear Equipo</button>
     </form>

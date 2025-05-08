@@ -18,7 +18,6 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Estado</th>
-                <th>Aula</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                     <td>{{ $equipo->marca }}</td>
                     <td>{{ $equipo->modelo }}</td>
                     <td>{{ $equipo->estado }}</td>
-                    <td>{{ $equipo->aula->nombre ?? 'Sin aula' }}</td>
                     <td>
                         <a href="{{ route('equipo.show', $equipo->id) }}" class="btn btn-sm btn-info">Ver</a>
                         <a href="{{ route('equipo.edit', $equipo->id) }}" class="btn btn-sm btn-warning">Editar</a>
