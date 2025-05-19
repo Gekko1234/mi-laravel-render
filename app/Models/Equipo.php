@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Equipo.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,16 @@ class Equipo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion', 'marca', 'modelo', 'numero_serie', 'fecha_adquisicion', 'estado',];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'marca',
+        'modelo',
+        'numero_serie',
+        'fecha_adquisicion',
+        'estado',
+        'aula_id',  
+    ];
 
     // Relación con Prestamos
     public function prestamos()
@@ -24,5 +32,9 @@ class Equipo extends Model
         return $this->hasMany(Averia::class);
     }
 
+    // Relación con Aula (muchos equipos pueden pertenecer a un aula)
+    public function aula()
+    {
+        return $this->belongsTo(Aula::class);
+    }
 }
-

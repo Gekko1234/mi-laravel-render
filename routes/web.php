@@ -8,6 +8,7 @@ use App\Http\Controllers\AveriaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\AulaController;
 
 
 // Ruta principal / LANDING
@@ -65,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/equipo', [EquipoController::class, 'index'])->name('equipo.index');
     Route::get('/equipo/create', [EquipoController::class, 'create'])->name('equipo.create');
     Route::post('/equipo', [EquipoController::class, 'store'])->name('equipo.store');
-    Route::get('/equipo/{id}', [EquipoController::class, 'show'])->name('equipo.show');
+    Route::get('equipo/{id}', [EquipoController::class, 'show'])->name('equipo.show');
     Route::get('/equipo/{id}/edit', [EquipoController::class, 'edit'])->name('equipo.edit');
     Route::put('/equipo/{id}', [EquipoController::class, 'update'])->name('equipo.update');
     Route::delete('/equipo/{id}', [EquipoController::class, 'destroy'])->name('equipo.destroy');
@@ -87,4 +88,24 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
 
+
+    // Ruta de las aulas y mapa
+    Route::get('/aulas/mapa', [AulaController::class, 'mapa'])->name('aulas.mapa');
+    Route::get('/aulas', [AulaController::class, 'index'])->name('aulas.index');     // Mostrar todas las aulas
+    Route::get('/aulas/create', [AulaController::class, 'create'])->name('aulas.create');     // Mostrar formulario para crear una nueva aula
+    Route::post('/aulas', [AulaController::class, 'store'])->name('aulas.store');     // Guardar una nueva aula
+    Route::get('/aulas/{aula}', [AulaController::class, 'show'])->name('aulas.show');     // Mostrar una aula específica
+    Route::get('/aulas/{aula}/edit', [AulaController::class, 'edit'])->name('aulas.edit');     // Mostrar formulario para editar una aula
+    Route::put('/aulas/{aula}', [AulaController::class, 'update'])->name('aulas.update');     // Actualizar una aula
+    Route::delete('/aulas/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');     // Eliminar una aula
+
 });
+
+
+
+
+
+
+
+
+

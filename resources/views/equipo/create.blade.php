@@ -43,9 +43,24 @@
             <select name="estado" id="estado" class="form-select" required>
                 <option value="Disponible" {{ old('estado') == 'Disponible' ? 'selected' : '' }}>Disponible</option>
                 <option value="En Reparación" {{ old('estado') == 'En Reparación' ? 'selected' : '' }}>En Reparación</option>
-                <option value="Fuera de servicio" {{ old('estado') == 'Fuera de servicio' ? 'selected' : '' }}>Fuera de servicio</option>
+                <option value="Dado de baja" {{ old('estado') == 'Dado de baja' ? 'selected' : '' }}>Dado de baja</option>
+                <option value="En uso" {{ old('estado') == 'En uso' ? 'selected' : '' }}>En uso</option>
             </select>
         </div>
+
+        <div class="form-group">
+            <label for="aula_id">Aula</label>
+            <select name="aula_id" id="aula_id" class="form-control" required>
+                <option value="">-- Seleccione un aula --</option>
+                @foreach($aulas as $aula)
+                    <option value="{{ $aula->id }}" 
+                        @if(isset($equipo) && $equipo->aula_id == $aula->id) selected @endif>
+                        {{ $aula->nombre }} (Planta {{ $aula->planta }})
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        
 
 
         <button type="submit" class="btn btn-success">Crear Equipo</button>
