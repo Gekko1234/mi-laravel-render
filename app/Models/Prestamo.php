@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Prestamo.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,7 @@ class Prestamo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['equipo_id', 'user_id', 'fecha_prestamo', 'fecha_devolucion', 'observaciones'];
+    protected $fillable = ['equipo_id', 'user_id', 'fecha_prestamo', 'fecha_devolucion', 'observaciones', 'estado'];
 
     // Relación con Usuario
     public function user()

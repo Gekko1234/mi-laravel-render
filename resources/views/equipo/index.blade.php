@@ -18,6 +18,7 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Estado</th>
+                <th>Localizacion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                     <td>{{ $equipo->marca }}</td>
                     <td>{{ $equipo->modelo }}</td>
                     <td>{{ $equipo->estado }}</td>
+                    <td>{{ $equipo->aula ? $equipo->aula->nombre . ' (Planta ' . $equipo->aula->planta . ')' : 'Sin asignar' }}</td>
                     <td>
                         <a href="{{ route('equipo.show', $equipo->id) }}" class="btn btn-sm btn-info">Ver</a>
                         <a href="{{ route('equipo.edit', $equipo->id) }}" class="btn btn-sm btn-warning">Editar</a>
@@ -42,4 +44,5 @@
             @endforeach
         </tbody>
     </table>
+    <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
 @endsection

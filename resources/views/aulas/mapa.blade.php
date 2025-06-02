@@ -26,15 +26,22 @@
         @endforeach
 
         @foreach($aulas as $aula)
+            @php
+                $mapWidth = 2182;
+                $mapHeight = 3086;
+
+                $pos_x_percent = ($aula->pos_x / $mapWidth) * 100;
+                $pos_y_percent = ($aula->pos_y / $mapHeight) * 100;
+            @endphp
+
             <div
                 class="aula-marker"
                 data-planta="{{ $aula->planta }}"
-                style="top: {{ $aula->pos_y }}px; left: {{ $aula->pos_x }}px;"
+                style="top: {{ $pos_y_percent }}%; left: {{ $pos_x_percent }}%;"
                 title="{{ $aula->nombre }}"
             >
-                <span class="toggle-equipos" title="Ver equipos">👁️</span>
-
-                <div class="equipos-list">
+            <img src="{{ asset('images/ojo.png') }}" alt="Ver equipos" class="toggle-equipos" title="Ver equipos">
+            <div class="equipos-list">
                     <ul>
                         @foreach($aula->equipos as $equipo)
                             <li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use App\Models\Aula;
 use Illuminate\Http\Request;
+use App\Http\Controllers\PrestamoController;
 
 class EquipoController extends Controller
 {
@@ -82,4 +83,5 @@ class EquipoController extends Controller
 
         return redirect()->route('equipo.index')->with('success', 'Equipo eliminado correctamente.');
     }
+
 }

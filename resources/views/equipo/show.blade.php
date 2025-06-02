@@ -13,6 +13,11 @@
             <p><strong>Número de Serie:</strong> {{ $equipo->numero_serie }}</p>
             <p><strong>Fecha de Adquisición:</strong> {{ $equipo->fecha_adquisicion }}</p>
             <p><strong>Estado:</strong> {{ $equipo->estado }}</p>
+            @if ($equipo->aula)
+                <p><strong>Aula:</strong> {{ $equipo->aula->nombre }} (Planta {{ $equipo->aula->planta }})</p>
+            @else
+                <p><strong>Aula:</strong> No asignada</p>
+            @endif
         </div>
     </div>
 

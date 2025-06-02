@@ -65,5 +65,6 @@
         <input type="checkbox" id="es_admin" name="es_admin" value="1" {{ old('es_admin') ? 'checked' : '' }}>
 
         <button type="submit">Crear Usuario</button>
+        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 @endsection

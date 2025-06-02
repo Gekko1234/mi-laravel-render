@@ -6,6 +6,7 @@ use App\Models\Prestamo;
 use App\Models\User;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PrestamoController extends Controller
 {
@@ -13,7 +14,7 @@ class PrestamoController extends Controller
     public function index()
     {
         // Obtener todos los préstamos
-        $prestamos = Prestamo::with('usuario', 'equipo')->get();
+        $prestamos = Prestamo::with('user', 'equipo')->get();
         return view('prestamos.index', compact('prestamos'));
     }
 
@@ -31,25 +32,89 @@ class PrestamoController extends Controller
     // Almacenar un nuevo préstamo
     public function store(Request $request)
     {
-        // Validación de los datos del formulario
+        $validated = $request->validate([
+            'equipo_id' => 'required|exists:equipos,id',
+            'user_id' => 'required|exists:users,id',
+            // Puedes quitar la validación de fecha_prestamo si la manejas aquí
+            'observaciones' => 'nullable|string',
+        ]);
+
+        // Guardar la fecha actual como fecha de préstamo
+        $validated['fecha_prestamo'] = Carbon::now();
+        $validated['estado'] = 'Prestado';
+
+        Prestamo::create($validated);
+
+        $equipo = Equipo::find($request->equipo_id);
+        if ($equipo) {
+            $equipo->estado = 'En uso';
+            $equipo->save();
+        }
+
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo registrado correctamente.');
+    }
+
+
+    // Mostrar formulario de edición
+    public function edit($id)
+    {
+        $prestamo = Prestamo::findOrFail($id);
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+
+        return view('prestamos.edit', compact('prestamo', 'usuarios', 'equipos'));
+    }
+
+    // Guardar los cambios en la base de datos
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'usuario_id' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'equipo_id' => 'required|exists:equipos,id',
             'fecha_prestamo' => 'required|date',
             'fecha_devolucion' => 'nullable|date',
             'observaciones' => 'nullable|string',
         ]);
 
-        // Crear un nuevo préstamo
-        Prestamo::create([
-            'usuario_id' => $request->usuario_id,
-            'equipo_id' => $request->equipo_id,
-            'fecha_prestamo' => $request->fecha_prestamo,
-            'fecha_devolucion' => $request->fecha_devolucion,
-            'observaciones' => $request->observaciones,
-        ]);
+        $prestamo = Prestamo::findOrFail($id);
+        $prestamo->update($request->all());
 
-        // Redirigir a la lista de préstamos con un mensaje de éxito
-        return redirect()->route('prestamos.index')->with('success', 'Préstamo creado correctamente.');
+        // Actualizar estado del equipo según el estado del préstamo
+        $equipo = Equipo::find($prestamo->equipo_id);
+        if ($equipo) {
+            if ($prestamo->estado === 'Prestado') {
+                $equipo->estado = 'En uso';
+            } elseif ($prestamo->estado === 'Sin prestar') {
+                $equipo->estado = 'Disponible';  
+            }
+            $equipo->save();
+        }
+
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo actualizado correctamente.');
     }
+
+    public function destroy($id)
+    {
+        $prestamo = Prestamo::findOrFail($id);
+        $prestamo->delete();
+
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo eliminado correctamente.');
+    }
+
+    public function finalizar(Prestamo $prestamo)
+    {
+        $prestamo->estado = 'Sin prestar';
+        $prestamo->fecha_devolucion = Carbon::now();  // Fecha finalización
+        $prestamo->save();
+
+        if ($prestamo->equipo) {
+            $prestamo->equipo->estado = 'Disponible';
+            $prestamo->equipo->save();
+        }
+
+        return redirect()->back()->with('success', 'Préstamo finalizado y equipo actualizado.');
+    }
+
+
+
 }

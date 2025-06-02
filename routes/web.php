@@ -13,7 +13,7 @@ use App\Http\Controllers\AulaController;
 
 // Ruta principal / LANDING
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.panel');
 });
 
 // Mostrar el formulario de login
@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tecnicos/create', [TecnicoController::class, 'create'])->name('tecnicos.create');
     Route::post('/tecnicos', [TecnicoController::class, 'store'])->name('tecnicos.store');
     Route::get('/tecnicos/{id}/edit', [TecnicoController::class, 'edit'])->name('tecnicos.edit');
+    Route::get('/tecnicos/{id}', [TecnicoController::class, 'show'])->name('tecnicos.show');
     Route::put('/tecnicos/{id}', [TecnicoController::class, 'update'])->name('tecnicos.update');
     Route::delete('/tecnicos/{id}', [TecnicoController::class, 'destroy'])->name('tecnicos.destroy');
 
@@ -61,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/averias/{id}/edit', [AveriaController::class, 'edit'])->name('averias.edit');
     Route::put('/averias/{id}', [AveriaController::class, 'update'])->name('averias.update');
     Route::delete('/averias/{id}', [AveriaController::class, 'destroy'])->name('averias.destroy');
+    Route::post('/averias/{id}/finalizar', [AveriaController::class, 'finalizar'])->name('averias.finalizar');
 
     // Rutas de Equipos
     Route::get('/equipo', [EquipoController::class, 'index'])->name('equipo.index');
@@ -79,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prestamos/{id}/edit', [PrestamoController::class, 'edit'])->name('prestamos.edit');
     Route::put('/prestamos/{id}', [PrestamoController::class, 'update'])->name('prestamos.update');
     Route::delete('/prestamos/{id}', [PrestamoController::class, 'destroy'])->name('prestamos.destroy');
+    Route::post('/prestamos/{prestamo}/finalizar', [App\Http\Controllers\PrestamoController::class, 'finalizar'])->name('prestamos.finalizar');
 
     // Rutas de Usuarios (solo administradores pueden acceder a la creación y edición de usuarios)
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');

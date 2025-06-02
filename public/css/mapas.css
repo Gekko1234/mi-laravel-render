@@ -1,11 +1,14 @@
+/* Contenedor del mapa */
 .mapa-container {
     position: relative;
-    width: 800px;  /* fijamos tamaño para que coincida */
-    height: 800px;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 864 / 1233; /* proporción original del mapa */
     border: 1px solid #ccc;
-    margin-top: 20px;
+    margin: 20px auto;
 }
 
+/* Imagen del plano */
 .mapa-planta {
     position: absolute;
     top: 0;
@@ -23,34 +26,42 @@
     pointer-events: auto;
 }
 
+/* Marcador del aula */
 .aula-marker {
     position: absolute;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: transparent;
-    transform: translate(-50%, -50%); /* para centrar el icono exactamente en la coordenada */
+    z-index: 100;
 }
 
+/* Icono (imagen) dentro del marcador */
 .toggle-equipos {
-    font-size: 24px;
-    user-select: none;
+    width: 20px;
+    height: 20px;
 }
 
+/* Hacer el icono más pequeño en móviles */
+@media (max-width: 768px) {
+    .toggle-equipos {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Lista de equipos */
 .equipos-list {
     position: absolute;
-    top: 28px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid #aaa;
-    padding: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 10;
-    min-width: 150px;
+    min-width: 200px;
     display: none;
     border-radius: 4px;
 }

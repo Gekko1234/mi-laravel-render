@@ -25,9 +25,10 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>
+            <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
         </div>
     @endif
 
-    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    
 </div>
 @endsection

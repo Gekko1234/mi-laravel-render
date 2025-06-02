@@ -78,16 +78,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     mapa.addEventListener('click', function (e) {
         const rect = mapa.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
 
-        // Limita para que no pase del contenedor
-        const maxX = mapa.clientWidth;
-        const maxY = mapa.clientHeight;
+        const renderWidth = mapa.clientWidth;
+        const renderHeight = mapa.clientHeight;
 
-        inputX.value = Math.min(Math.max(0, Math.round(x)), maxX);
-        inputY.value = Math.min(Math.max(0, Math.round(y)), maxY);
-    });
+        // Tamaño real del plano
+        const mapWidth = 2182;
+        const mapHeight = 3086;
+
+        const porcentajeX = clickX / renderWidth;
+        const porcentajeY = clickY / renderHeight;
+
+        // Guardamos coordenadas relativas al mapa original
+        inputX.value = Math.round(porcentajeX * mapWidth);
+        inputY.value = Math.round(porcentajeY * mapHeight);
+
+            });
 });
 </script>
 @endsection

@@ -15,5 +15,5 @@
     @endforelse
 </ul>
 
-<a href="{{ route('aulas.index') }}">Volver</a>
+<a href="{{ route('aulas.index') }}" class="btn btn-secondary">Volver</a>
 @endsection

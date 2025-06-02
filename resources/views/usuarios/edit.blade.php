@@ -61,7 +61,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

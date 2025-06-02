@@ -28,6 +28,6 @@
         </div>
 
         <button type="submit" class="btn btn-success">Actualizar Técnico</button>
-        <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 @endsection

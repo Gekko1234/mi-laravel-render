@@ -44,19 +44,14 @@
         <div class="mb-3">
             <label for="estado">Estado</label>
             <select name="estado" class="form-select" required>
-                <option value="Pendiente" {{ $averia->estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                <option value="En proceso" {{ $averia->estado == 'En proceso' ? 'selected' : '' }}>En proceso</option>
-                <option value="Resuelto" {{ $averia->estado == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
+                <option value="Pendiente" {{ old('estado') == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="En reparación" {{ old('estado') == 'En reparación' ? 'selected' : '' }}>En reparación</option>
+                <option value="Resuelto" {{ old('estado') == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
             </select>
-        </div>
-
-        {{-- Fecha de resolución --}}
-        <div class="mb-3">
-            <label for="fecha_resolucion">Fecha resolución</label>
-            <input type="date" name="fecha_resolucion" class="form-control"
-                   value="{{ $averia->fecha_resolucion }}">
+            
         </div>
 
         <button type="submit" class="btn btn-success">Actualizar Avería</button>
+        <a href="{{ route('averias.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 @endsection

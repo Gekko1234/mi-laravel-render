@@ -22,25 +22,13 @@
 
             <!-- Selección de usuario -->
             <div class="mb-3">
-                <label for="usuario_id" class="form-label">Usuario</label>
-                <select name="usuario_id" class="form-select" required>
+                <label for="user_id" class="form-label">Usuario</label>
+                <select name="user_id" class="form-select" required>
                     <option value="">Seleccione un usuario</option>
                     @foreach($usuarios as $usuario)
                         <option value="{{ $usuario->id }}">{{ $usuario->name }}</option> <!-- Mostrar nombre -->
                     @endforeach
                 </select>
-            </div>
-
-            <!-- Fecha de préstamo -->
-            <div class="mb-3">
-                <label for="fecha_prestamo" class="form-label">Fecha de Préstamo</label>
-                <input type="date" name="fecha_prestamo" class="form-control" required>
-            </div>
-
-            <!-- Fecha de devolución -->
-            <div class="mb-3">
-                <label for="fecha_devolucion" class="form-label">Fecha de Devolución</label>
-                <input type="date" name="fecha_devolucion" class="form-control">
             </div>
 
             <!-- Observaciones -->
@@ -50,6 +38,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Registrar Préstamo</button>
+            <a href="{{ route('prestamos.index') }}" class="btn btn-secondary">Volver</a>
         </form>
     </div>
 @endsection

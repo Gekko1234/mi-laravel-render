@@ -11,10 +11,10 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="usuario_id" class="form-label">Usuario</label>
-                <select name="usuario_id" class="form-select" required>
+                <label for="user_id" class="form-label">Usuario</label>
+                <select name="user_id" class="form-select" required>
                     @foreach($usuarios as $usuario)
-                        <option value="{{ $usuario->id }}" {{ $prestamo->usuario_id == $usuario->id ? 'selected' : '' }}>
+                        <option value="{{ $usuario->id }}" {{ $prestamo->user_id == $usuario->id ? 'selected' : '' }}>
                             {{ $usuario->name }}
                         </option>
                     @endforeach
@@ -32,6 +32,12 @@
                 </select>
             </div>
 
+            {{-- Estado --}}
+            <select name="estado" class="form-select" required>
+                <option value="Prestado" {{ $prestamo->estado === 'Prestado' ? 'selected' : '' }}>Prestado</option>
+                <option value="Sin prestar" {{ $prestamo->estado === 'Sin prestar' ? 'selected' : '' }}>Sin prestar</option>
+            </select>
+
             <div class="mb-3">
                 <label for="fecha_prestamo" class="form-label">Fecha Préstamo</label>
                 <input type="date" name="fecha_prestamo" class="form-control" value="{{ $prestamo->fecha_prestamo }}">
@@ -48,7 +54,8 @@
             </div>
 
             <button type="submit" class="btn btn-success">Actualizar</button>
-            <a href="{{ route('prestamos.index') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('prestamos.index') }}" class="btn btn-secondary">Volver</a>
         </form>
+        
     </div>
 @endsection

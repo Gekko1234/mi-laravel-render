@@ -6,6 +6,7 @@ use App\Models\Averia;
 use App\Models\Equipo;
 use App\Models\Tecnico;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AveriaController extends Controller
 {
@@ -15,6 +16,7 @@ class AveriaController extends Controller
         $averias = Averia::all();
         return view('averias.index', compact('averias'));
     }
+    
 
     // Crear una nueva avería
     public function create()
@@ -29,26 +31,22 @@ class AveriaController extends Controller
     // Almacenar una nueva avería
     public function store(Request $request)
     {
-        // Validación de los datos del formulario
         $request->validate([
             'equipo_id' => 'required|exists:equipos,id',
-            'descripcion' => 'required|string|max:500',
-            'estado' => 'required|string|max:100',
-            'fecha_resolucion' => 'nullable|date',
-            'tecnico_id' => 'nullable|exists:tecnicos,id',
+            'descripcion' => 'required|string',
         ]);
 
-        // Crear una nueva avería
-        Averia::create([
+        $averia = Averia::create([
             'equipo_id' => $request->equipo_id,
             'descripcion' => $request->descripcion,
-            'estado' => $request->estado,
-            'fecha_resolucion' => $request->fecha_resolucion,
-            'tecnico_id' => $request->tecnico_id,
+            'estado' => 'Pendiente',
+            'fecha_creacion' => now(),
         ]);
 
-        // Redirigir a la lista de averías con un mensaje de éxito
-        return redirect()->route('averias.index')->with('success', 'Avería registrada correctamente.');
+        // Cambiar estado del equipo a "En reparación"
+        $averia->equipo->update(['estado' => 'En reparación']);
+
+        return redirect()->route('averias.index')->with('success', 'Avería registrada y equipo marcado en reparación.');
     }
 
     // Mostrar el formulario para editar una avería
@@ -97,4 +95,22 @@ class AveriaController extends Controller
         // Redirigir a la lista de averías con un mensaje de éxito
         return redirect()->route('averias.index')->with('success', 'Avería eliminada correctamente.');
     }
+
+    // Metodo del boton de finalizar
+    public function finalizar($id)
+    {
+        $averia = Averia::findOrFail($id);
+
+        $averia->estado = 'Resuelto';
+        $averia->fecha_resolucion = now();
+        $averia->save();
+
+        // Opcional: marcar equipo como "Disponible"
+        $equipo = $averia->equipo;
+        $equipo->estado = 'Disponible';
+        $equipo->save();
+
+        return redirect()->back()->with('success', 'Avería finalizada.');
+    }
+
 }

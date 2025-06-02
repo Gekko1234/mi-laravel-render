@@ -56,17 +56,12 @@
             <label for="estado" class="form-label">Estado</label>
             <select name="estado" class="form-select" required>
                 <option value="Pendiente" {{ old('estado') == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                <option value="En proceso" {{ old('estado') == 'En proceso' ? 'selected' : '' }}>En proceso</option>
+                <option value="En reparación" {{ old('estado') == 'En reparación' ? 'selected' : '' }}>En reparación</option>
                 <option value="Resuelto" {{ old('estado') == 'Resuelto' ? 'selected' : '' }}>Resuelto</option>
-            </select>
-        </div>
-
-        {{-- Fecha de resolución --}}
-        <div class="mb-3">
-            <label for="fecha_resolucion" class="form-label">Fecha de resolución (opcional)</label>
-            <input type="date" name="fecha_resolucion" class="form-control" value="{{ old('fecha_resolucion') }}">
+            </select>            
         </div>
 
         <button type="submit" class="btn btn-success">Registrar Avería</button>
+        <a href="{{ route('averias.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 @endsection

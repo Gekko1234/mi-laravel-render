@@ -39,5 +39,6 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 @endsection

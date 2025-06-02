@@ -21,5 +21,5 @@
     <button type="submit">Actualizar</button>
 </form>
 
-<a href="{{ route('aulas.index') }}">Volver</a>
+<a href="{{ route('aulas.index') }}" class="btn btn-secondary mt-3">Volver</a>
 @endsection

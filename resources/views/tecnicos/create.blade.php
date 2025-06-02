@@ -25,6 +25,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+            <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Volver</a>
         </form>
     </div>
 @endsection

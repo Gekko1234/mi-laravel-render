@@ -61,9 +61,8 @@
             </select>
         </div>
         
-
-
         <button type="submit" class="btn btn-success">Crear Equipo</button>
+        <a href="{{ route('equipo.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection
