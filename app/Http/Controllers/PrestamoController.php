@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PrestamoController extends Controller
 {
@@ -113,6 +114,36 @@ class PrestamoController extends Controller
         }
 
         return redirect()->back()->with('success', 'Préstamo finalizado y equipo actualizado.');
+    }
+
+    public function verPrestamos($userId)
+    {
+        $usuario = User::findOrFail($userId);
+
+        $fechaInicio = Carbon::now()->subMonth();
+
+        $prestamos = $usuario->prestamos()
+            ->where('fecha_prestamo', '>=', $fechaInicio)
+            ->orderBy('fecha_prestamo', 'desc')
+            ->get();
+
+        return view('usuarios.prestamos', compact('usuario', 'prestamos'));
+    }
+
+    // Generar y descargar PDF con los préstamos del usuario
+    public function descargarPrestamosPDF($userId)
+    {
+        $usuario = User::findOrFail($userId);
+
+        $fechaInicio = Carbon::now()->subMonth();
+
+        $prestamos = $usuario->prestamos()
+            ->where('fecha_prestamo', '>=', $fechaInicio)
+            ->orderBy('fecha_prestamo', 'desc')
+            ->get();
+
+        $pdf = PDF::loadView('usuarios.prestamos_pdf', compact('usuario', 'prestamos'));
+        return $pdf->download('prestamos_'.$usuario->name.'_'.now()->format('Ymd').'.pdf');
     }
 
 

@@ -23,7 +23,11 @@
             <tbody>
                 @foreach ($prestamos as $prestamo)
                     <tr>
-                        <td>{{ $prestamo->user->name }}</td>
+                        <td>
+                            <a href="{{ route('usuarios.prestamos', $prestamo->user->id) }}">
+                                {{ $prestamo->user->name }}
+                            </a>
+                        </td>
                         <td>{{ $prestamo->equipo->nombre }}</td>
                         <td>{{ $prestamo->fecha_prestamo }}</td>
                         <td>{{ $prestamo->fecha_devolucion ?? 'No devuelto' }}</td>

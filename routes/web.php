@@ -13,7 +13,7 @@ use App\Http\Controllers\AulaController;
 
 // Ruta principal / LANDING
 Route::get('/', function () {
-    return view('admin.panel');
+    return view('welcome');
 });
 
 // Mostrar el formulario de login
@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/averias/{id}', [AveriaController::class, 'update'])->name('averias.update');
     Route::delete('/averias/{id}', [AveriaController::class, 'destroy'])->name('averias.destroy');
     Route::post('/averias/{id}/finalizar', [AveriaController::class, 'finalizar'])->name('averias.finalizar');
+    Route::get('/equipos/{equipo}/averias/pdf', [EquipoController::class, 'descargarAveriasPdf'])->name('equipos.averias.pdf');
+
 
     // Rutas de Equipos
     Route::get('/equipo', [EquipoController::class, 'index'])->name('equipo.index');
@@ -72,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/equipo/{id}/edit', [EquipoController::class, 'edit'])->name('equipo.edit');
     Route::put('/equipo/{id}', [EquipoController::class, 'update'])->name('equipo.update');
     Route::delete('/equipo/{id}', [EquipoController::class, 'destroy'])->name('equipo.destroy');
+    Route::get('/equipos/{equipo}/averias', [EquipoController::class, 'verAverias'])->name('equipos.averias');
+    
 
 
     // Rutas de Préstamos
@@ -90,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/{id}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios/{user}/prestamos', [PrestamoController::class, 'verPrestamos'])->name('usuarios.prestamos');     // Mostrar préstamos de un usuario específico
+    Route::get('/usuarios/{user}/prestamos/pdf', [PrestamoController::class, 'descargarPrestamosPDF'])->name('usuarios.prestamos.pdf');     // Descargar PDF con los préstamos del usuario
 
 
     // Ruta de las aulas y mapa
@@ -103,12 +109,3 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/aulas/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');     // Eliminar una aula
 
 });
-
-
-
-
-
-
-
-
-

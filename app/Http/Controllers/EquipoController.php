@@ -6,6 +6,11 @@ use App\Models\Equipo;
 use App\Models\Aula;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PrestamoController;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
+
 
 class EquipoController extends Controller
 {
@@ -83,5 +88,35 @@ class EquipoController extends Controller
 
         return redirect()->route('equipo.index')->with('success', 'Equipo eliminado correctamente.');
     }
+
+    // Ver las averias del equipo
+    public function verAverias(Equipo $equipo)
+    {
+        $desde = Carbon::now()->subMonth(); // Últimos 30 días
+
+        $averias = $equipo->averias()
+            ->where('fecha_creacion', '>=', $desde)
+            ->orderByDesc('fecha_creacion')
+            ->get();
+
+        return view('equipo.averias', compact('equipo', 'averias'));
+    }
+
+    // Descargar el pdf del equipo
+    public function descargarAveriasPdf($equipoId)
+    {
+        $equipo = Equipo::findOrFail($equipoId);
+
+        $fechaInicio = now()->subMonth();
+        $averias = $equipo->averias()->where('fecha_creacion', '>=', $fechaInicio)->get();
+
+        $pdf = PDF::loadView('equipo.averias_pdf', compact('equipo', 'averias'));
+
+        $nombreArchivo = 'averias_equipo_' . $equipo->id . '_' . now()->format('Ymd') . '.pdf';
+
+        return $pdf->download($nombreArchivo);
+    }
+
+
 
 }

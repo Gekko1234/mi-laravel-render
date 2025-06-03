@@ -26,7 +26,11 @@
         <tbody>
             @foreach ($averias as $averia)
                 <tr>
-                    <td>{{ $averia->equipo->nombre }}</td>
+                    <td>
+                        <a href="{{ route('equipos.averias', $averia->equipo->id) }}">
+                            {{ $averia->equipo->nombre }}
+                        </a>
+                    </td>                    
                     <td>{{ $averia->tecnico?->nombre ?? 'Sin asignar' }}</td>
                     <td>{{ Str::limit($averia->descripcion, 40) }}</td>
                     <td>{{ $averia->estado }}</td>
