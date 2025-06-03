@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Averías de {{ $equipo->nombre }}</title>
-    <style>
-        body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #000; padding: 6px; text-align: left; }
-        th { background-color: #eee; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/estilos_pdfs.css') }}">
 </head>
 <body>
     <h2>Averías de {{ $equipo->nombre }}</h2>
@@ -30,8 +25,8 @@
                     <tr>
                         <td>{{ $averia->descripcion }}</td>
                         <td>{{ $averia->estado }}</td>
-                        <td>{{ \Carbon\Carbon::parse($averia->fecha_creacion)->format('d/m/Y H:i') }}</td>
-                        <td>{{ $averia->fecha_resolucion ? \Carbon\Carbon::parse($averia->fecha_resolucion)->format('d/m/Y H:i') : 'Pendiente' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($averia->fecha_creacion)->format('d/m/Y') }}</td>
+                        <td>{{ $averia->fecha_resolucion ? \Carbon\Carbon::parse($averia->fecha_resolucion)->format('d/m/Y') : 'Pendiente' }}</td>
                     </tr>
                 @endforeach
             </tbody>

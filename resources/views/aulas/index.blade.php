@@ -28,7 +28,6 @@
                         </td>
                         <td>{{ $aula->planta }}</td>
                         <td>
-                            <a href="{{ route('aulas.edit', $aula->id) }}" class="btn btn-warning">Editar</a>
                             <form action="{{ route('aulas.destroy', $aula->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

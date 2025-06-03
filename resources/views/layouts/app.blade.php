@@ -21,36 +21,49 @@
 <body>
     
     <!-- Navbar -->
-    <div class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <!-- Enlace al inicio -->
             <a class="navbar-brand" href="{{ url('/') }}">Inicio</a>
-            
-            <div class="navbar-nav ms-auto">
-                <!-- Si el usuario está autenticado, muestra los siguientes elementos -->
-                @auth
-                    <span class="navbar-text text-light me-3">| {{ Auth::user()->name }} |</span>
 
-                    <!-- Si es admin o profesor, muestra el panel de administración -->
-                    @if(Auth::check() && (Auth::user()->es_admin || Auth::user()->cargo === 'Profesor'))
-                        <a class="nav-link text-light" href="{{ route('admin.panel') }}">Panel de Administración</a>
-                        <a class="nav-link text-light" href="{{ route('aulas.mapa') }}">Ver mapa de aulas</a>
+            <!-- Botón toggler para móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    @endif
+            <!-- Contenido colapsable -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @auth
+                        <li class="nav-item d-flex align-items-center">
+                            <span class="nav-link disabled text-light mb-0">| {{ Auth::user()->name }} |</span>
+                        </li>                    
+                        @if(Auth::user()->es_admin || Auth::user()->cargo === 'Profesor')
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('admin.panel') }}">Panel de Administración</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('aulas.mapa') }}">Ver mapa de aulas</a>
+                            </li>
+                        @endif
 
-                    
-                    <!-- Botón de Cerrar sesión -->
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-link text-light">Cerrar sesión</button>
-                    </form>
-                @else
-                    <!-- Si no está autenticado, muestra el enlace de login -->
-                    <a class="nav-link text-light" href="{{ route('login') }}">Iniciar sesión</a>
-                @endauth
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link text-light">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('login') }}">Iniciar sesión</a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
+
 
     <!-- Contenido de cada página -->
     <div class="container">

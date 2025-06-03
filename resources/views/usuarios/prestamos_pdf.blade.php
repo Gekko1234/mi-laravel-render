@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Préstamos de {{ $usuario->name }}</title>
-    <style>
-        body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #000; padding: 6px; text-align: left; }
-        th { background-color: #eee; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/estilos_pdfs.css') }}">
 </head>
 <body>
     <h2>Préstamos de {{ $usuario->name }}</h2>
@@ -30,8 +25,8 @@
                 @foreach ($prestamos as $prestamo)
                     <tr>
                         <td>{{ $prestamo->equipo->nombre }}</td>
-                        <td>{{ \Carbon\Carbon::parse($prestamo->fecha_prestamo)->format('d/m/Y H:i') }}</td>
-                        <td>{{ $prestamo->fecha_devolucion ? \Carbon\Carbon::parse($prestamo->fecha_devolucion)->format('d/m/Y H:i') : 'No devuelto' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($prestamo->fecha_prestamo)->format('d/m/Y') }}</td>
+                        <td>{{ $prestamo->fecha_devolucion ? \Carbon\Carbon::parse($prestamo->fecha_devolucion)->format('d/m/Y') : 'No devuelto' }}</td>
                         <td>{{ $prestamo->observaciones ?? 'N/A' }}</td>
                         <td>{{ $prestamo->estado === 'Sin prestar' ? 'Finalizado' : $prestamo->estado }}</td>
                     </tr>

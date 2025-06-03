@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Crear Aula</h1>
+    <h1 class="mb-4 text-center">Crear Aula</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -53,7 +53,7 @@
             <input type="number" name="pos_y" id="pos_y" class="form-control" readonly required value="{{ old('pos_y') }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar Aula</button>
+        <button type="submit" class="btn btn-success">Guardar Aula</button>
         <a href="{{ route('aulas.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>

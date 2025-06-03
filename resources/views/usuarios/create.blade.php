@@ -1,70 +1,82 @@
-@extends('layouts.app') <!-- Extiende el layout principal de la aplicación -->
+@extends('layouts.app')
 
-@section('title', 'Crear Usuario') <!-- Título de la página -->
+@section('title', 'Crear Usuario')
 
 @section('content')
-    <!-- Contenido principal -->
-    <h1>Crear nuevo usuario</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Crear nuevo usuario</h1>
 
-    <!-- Mostrar mensaje de éxito si se crea el usuario -->
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Formulario para crear usuario -->
-    <form method="POST" action="{{ route('usuarios.store') }}">
-        @csrf
-    
-        <!-- Nombre -->
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-        @error('name') <span class="error">{{ $message }}</span> @enderror
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ route('usuarios.store') }}">
+                @csrf
 
-        <!-- Email -->
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-        @error('email') <span class="error">{{ $message }}</span> @enderror
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Contraseña -->
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required>
-        @error('password') <span class="error">{{ $message }}</span> @enderror
+                <div class="mb-3">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" required>
+                    @error('apellidos') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Confirmar Contraseña -->
-        <label for="password_confirmation">Confirmar Contraseña</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" required>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Apellidos -->
-        <label for="apellidos">Apellidos</label>
-        <input type="text" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" required>
-        @error('apellidos') <span class="error">{{ $message }}</span> @enderror
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Cargo -->
-        <label for="cargo" class="form-label">Cargo</label>
-        <select name="cargo" id="cargo" class="form-select" required>
-            <option value="">Seleccionar cargo</option>
-            <option value="Profesor" {{ old('cargo') == 'Profesor' ? 'selected' : '' }}>Profesor</option>
-            <option value="Alumno" {{ old('cargo') == 'Alumno' ? 'selected' : '' }}>Alumno</option>
-        </select>
-        @error('cargo') <small class="text-danger">{{ $message }}</small> @enderror
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                </div>
 
-        <!-- Departamento -->
-        <label for="departamento">Departamento</label>
-        <input type="text" id="departamento" name="departamento" value="{{ old('departamento') }}">
-        @error('departamento') <span class="error">{{ $message }}</span> @enderror
+                <div class="mb-3">
+                    <label for="cargo" class="form-label">Cargo</label>
+                    <select name="cargo" id="cargo" class="form-select" required>
+                        <option value="">Seleccionar cargo</option>
+                        <option value="Profesor" {{ old('cargo') == 'Profesor' ? 'selected' : '' }}>Profesor</option>
+                        <option value="Alumno" {{ old('cargo') == 'Alumno' ? 'selected' : '' }}>Alumno</option>
+                    </select>
+                    @error('cargo') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Teléfono -->
-        <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" name="telefono" value="{{ old('telefono') }}" required>
-        @error('telefono') <span class="error">{{ $message }}</span> @enderror
+                <div class="mb-3">
+                    <label for="departamento" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="departamento" name="departamento" value="{{ old('departamento') }}">
+                    @error('departamento') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <!-- Es admin (checkbox) -->
-        <label for="es_admin">Es Admin</label>
-        <input type="checkbox" id="es_admin" name="es_admin" value="1" {{ old('es_admin') ? 'checked' : '' }}>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}" required>
+                    @error('telefono') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-        <button type="submit">Crear Usuario</button>
-        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
-    </form>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="es_admin" name="es_admin" value="1" {{ old('es_admin') ? 'checked' : '' }}>
+                    <label for="es_admin" class="form-check-label">¿Es administrador?</label>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Crear Usuario</button>
+                    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

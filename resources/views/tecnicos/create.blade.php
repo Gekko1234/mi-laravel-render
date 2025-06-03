@@ -3,29 +3,38 @@
 @section('title', 'Agregar Técnico')
 
 @section('content')
-    <h1 class="text-center mt-4">Agregar Nuevo Técnico</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Agregar Nuevo Técnico</h1>
 
-    <div class="container mt-5">
-        <form action="{{ route('tecnicos.store') }}" method="POST">
-            @csrf
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form action="{{ route('tecnicos.store') }}" method="POST">
+                @csrf
 
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-            <div class="form-group">
-                <label for="especialidad">Especialidad</label>
-                <input type="text" class="form-control" id="especialidad" name="especialidad" required>
-            </div>
+                <div class="mb-3">
+                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <input type="text" class="form-control" id="especialidad" name="especialidad" required>
+                    @error('especialidad') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-            <div class="form-group">
-                <label for="contacto">Contacto</label>
-                <input type="text" class="form-control" id="contacto" name="contacto" required>
-            </div>
+                <div class="mb-3">
+                    <label for="contacto" class="form-label">Contacto</label>
+                    <input type="text" class="form-control" id="contacto" name="contacto" required>
+                    @error('contacto') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-            <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Volver</a>
-        </form>
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Volver</a>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 @endsection

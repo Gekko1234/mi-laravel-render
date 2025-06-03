@@ -3,29 +3,36 @@
 @section('title', 'Listado de Usuarios')
 
 @section('content')
-<div class="container mt-4">
-    <h2>Usuarios Registrados</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Usuarios Registrados</h2>
 
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Ficha</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($usuarios as $usuario)
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-light">
                 <tr>
-                    <td>{{ $usuario->name }}</td>
-                    <td>{{ $usuario->email }}</td>
-                    <td>
-                        <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-info btn-sm">Ficha de usuario</a>
-                    </td>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th class="text-center">Ficha</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+            </thead>
+            <tbody>
+                @foreach($usuarios as $usuario)
+                    <tr>
+                        <td>{{ $usuario->name }}</td>
+                        <td>{{ $usuario->email }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-info btn-sm">
+                                Ficha de usuario
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4 text-end">
+        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+    </div>
 </div>
 @endsection

@@ -1,30 +1,40 @@
-@extends('layouts.app') <!-- Extiende el layout principal de la aplicación -->
+@extends('layouts.app')
 
-@section('title', 'Iniciar Sesión') <!-- Título de la página -->
+@section('title', 'Iniciar Sesión')
 
 @section('content')
-    <!-- Contenido principal -->
-    <h1>Iniciar Sesión</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="mb-4 text-center">Iniciar Sesión</h1>
 
-    <!-- Mensaje de error si no se puede iniciar sesión -->
-    @if (session('error'))
-        <div style="color: red;">{{ session('error') }}</div>
-    @endif
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
 
-    <!-- Formulario de inicio de sesión -->
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+            <div class="card shadow-sm mt-9">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required autofocus>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" id="email" name="email" class="form-control" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
-
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <button type="submit">Entrar</button>
-    </form>
+    </div>
+</div>
 @endsection
