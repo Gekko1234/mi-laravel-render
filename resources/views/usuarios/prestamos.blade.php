@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <h1 class="mb-4 d-flex justify-content-between align-items-center flex-wrap">
         Préstamos de {{ $usuario->name }}
-        <a href="{{ route('usuarios.prestamos.pdf', $usuario->id) }}" class="btn btn-primary mb-2" target="_blank">
+        <a href="{{ route('usuarios.prestamos.pdf', $usuario->id) }}" class="btn btn-primary" target="_blank">
             Descargar PDF
         </a>
     </h1>

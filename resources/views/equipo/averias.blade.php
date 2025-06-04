@@ -3,10 +3,10 @@
 @section('title', 'Averías de ' . $equipo->nombre)
 
 @section('content')
-<div class="container mt-4">
-    <h1 class="mb-4 text-center">
+<div class="container mt-5">
+    <h1 class="mb-4 d-flex justify-content-between align-items-center flex-wrap">
         Averías del equipo: {{ $equipo->nombre }}
-        <a href="{{ route('equipos.averias.pdf', $equipo->id) }}" class="btn btn-primary mb-2" target="_blank">
+        <a href="{{ route('equipos.averias.pdf', $equipo->id) }}" class="btn btn-primary" target="_blank">
             Descargar PDF
         </a>
     </h1>
