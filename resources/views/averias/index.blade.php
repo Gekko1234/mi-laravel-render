@@ -12,7 +12,6 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('averias.create') }}" class="btn btn-success">Crear nueva avería</a>
-        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 
     <div class="table-responsive">
@@ -69,6 +68,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-3">
+            <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+        </div>
     </div>
 </div>
 @endsection

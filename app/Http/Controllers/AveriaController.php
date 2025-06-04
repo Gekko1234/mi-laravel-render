@@ -33,7 +33,9 @@ class AveriaController extends Controller
     {
         $request->validate([
             'equipo_id' => 'required|exists:equipos,id',
+            'tecnico_id' => 'nullable|exists:tecnicos,id',
             'descripcion' => 'required|string',
+            'estado' => 'required|string|in:Pendiente,En reparación,Resuelto',
         ]);
 
         $averia = Averia::create([
@@ -41,6 +43,7 @@ class AveriaController extends Controller
             'descripcion' => $request->descripcion,
             'estado' => 'Pendiente',
             'fecha_creacion' => now(),
+            'tecnico_id' => $request->tecnico_id,
         ]);
 
         // Cambiar estado del equipo a "En reparación"

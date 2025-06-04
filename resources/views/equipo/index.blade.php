@@ -10,7 +10,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="d-flex justify-content-end mb-3">
+    <div class="d-flex mb-3">
         <a href="{{ route('equipo.create') }}" class="btn btn-success">Crear nuevo equipo</a>
     </div>
 
@@ -63,7 +63,7 @@
         </table>
     </div>
 
-    <div class="mt-4 text-end">
+    <div class="mt-3">
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>

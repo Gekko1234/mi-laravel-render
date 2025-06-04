@@ -15,20 +15,19 @@
         <li class="list-group-item"><strong>Departamento:</strong> {{ $usuario->departamento ?? 'N/A' }}</li>
     </ul>
 
-    @if(Auth::user()->es_admin)
-        <div class="mt-3">
-            <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>
+    <div class="mt-3">
+        @if(Auth::user()->es_admin)
+        <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>
 
-            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" class="d-inline"
-                  onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Eliminar</button>
-            </form>
-            <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
-        </div>
-    @endif
+        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" class="d-inline"
+                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+        @endif
+        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
 
-    
+    </div>
 </div>
 @endsection

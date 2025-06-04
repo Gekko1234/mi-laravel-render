@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center">Préstamos</h1>
 
-    <div class="d-flex justify-content-end mb-3">
+    <div class="d-flex mb-3">
         <a href="{{ route('prestamos.create') }}" class="btn btn-success">Crear Préstamo</a>
     </div>
 
@@ -63,7 +63,7 @@
         </table>
     </div>
 
-    <div class="text-end mt-3">
+    <div class="mt-3">
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>

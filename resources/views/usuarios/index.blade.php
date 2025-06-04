@@ -31,7 +31,7 @@
         </table>
     </div>
 
-    <div class="mt-4 text-end">
+    <div class="mt-3">
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>

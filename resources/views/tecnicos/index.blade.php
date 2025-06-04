@@ -7,7 +7,7 @@
 
 <div class="container mt-5">
     @if(Auth::user()->es_admin)
-        <div class="d-flex justify-content-end mb-3">
+        <div class="d-flex mb-3">
             <a href="{{ route('tecnicos.create') }}" class="btn btn-success">Agregar Nuevo Técnico</a>
         </div>
     @endif
@@ -51,7 +51,7 @@
         </table>
     </div>
 
-    <div class="mt-4 text-end">
+    <div class="mt-3">
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
