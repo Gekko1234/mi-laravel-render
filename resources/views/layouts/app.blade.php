@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Inventario</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpg">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS propio -->
@@ -19,13 +21,15 @@
 <head>
     
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <!-- Enlace al inicio -->
-            <a class="navbar-brand" href="{{ url('/') }}">Inicio</a>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('images/logo.jpg') }}" width="80px">
+            </a>
 
             <!-- Botón toggler para móviles -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -74,11 +78,21 @@
         </div>
     </nav>
 
+    
+
+
 
     <!-- Contenido de cada página -->
     <div class="container">
         @yield('content') <!-- Aquí se insertarán las páginas específicas -->
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-light py-4 mt-auto">
+        <div class="container text-center">
+            <small>&copy; {{ date('Y') }} Germán Melguizo Puerta</small>
+        </div>
+    </footer>
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
