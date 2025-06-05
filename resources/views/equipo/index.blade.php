@@ -15,7 +15,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table table-striped table-bordered align-middle datatable">
             <thead class="table-light">
                 <tr>
                     <th>Nombre</th>
@@ -49,12 +49,16 @@
                         <td>{{ $equipo->aula ? $equipo->aula->nombre . ' (Planta ' . $equipo->aula->planta . ')' : 'Sin asignar' }}</td>
                         <td class="text-center">
                             <a href="{{ route('equipo.show', $equipo->id) }}" class="btn btn-sm btn-info me-1">Ver</a>
-                            <a href="{{ route('equipo.edit', $equipo->id) }}" class="btn btn-sm btn-warning me-1">Editar</a>
+                            <a href="{{ route('equipo.edit', $equipo->id) }}" class="btn btn-sm btn-warning me-1">
+                                <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
+                            </a>
                             <form action="{{ route('equipo.destroy', $equipo->id) }}" method="POST" class="d-inline"
                                   onsubmit="return confirm('¿Estás seguro de eliminar este equipo?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                                <button class="btn btn-sm btn-danger">
+                                    <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Borrar
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -67,4 +71,9 @@
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
+
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush

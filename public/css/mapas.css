@@ -54,7 +54,7 @@
 .equipos-list {
     position: absolute;
     top: 30px;
-    left: 50%;
+    left: 95%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid #aaa;

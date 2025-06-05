@@ -41,7 +41,7 @@
                 style="top: {{ $pos_y_percent }}%; left: {{ $pos_x_percent }}%;"
                 title="{{ $aula->nombre }}"
             >
-                <img src="{{ asset('images/ojo.png') }}" alt="Ver equipos" class="toggle-equipos" title="Ver equipos">
+                <img src="{{ asset('images/marcador.png') }}" alt="Ver equipos" class="toggle-equipos" title="Ver equipos">
                 <div class="equipos-list">
                     <ul>
                         @foreach($aula->equipos as $equipo)
@@ -52,13 +52,15 @@
                             </li>
                         @endforeach
                     </ul>
+                    <div class="paginacion"></div>
                 </div>
             </div>
         @endforeach
     </div>
+    <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script src="{{ asset('js/mapas.js') }}"></script>
-@endsection
+@endpush

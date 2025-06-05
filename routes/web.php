@@ -100,12 +100,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Ruta de las aulas y mapa
     Route::get('/aulas/mapa', [AulaController::class, 'mapa'])->name('aulas.mapa');
-    Route::get('/aulas', [AulaController::class, 'index'])->name('aulas.index');     // Mostrar todas las aulas
-    Route::get('/aulas/create', [AulaController::class, 'create'])->name('aulas.create');     // Mostrar formulario para crear una nueva aula
-    Route::post('/aulas', [AulaController::class, 'store'])->name('aulas.store');     // Guardar una nueva aula
-    Route::get('/aulas/{aula}', [AulaController::class, 'show'])->name('aulas.show');     // Mostrar una aula específica
-    Route::get('/aulas/{aula}/edit', [AulaController::class, 'edit'])->name('aulas.edit');     // Mostrar formulario para editar una aula
-    Route::put('/aulas/{aula}', [AulaController::class, 'update'])->name('aulas.update');     // Actualizar una aula
-    Route::delete('/aulas/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');     // Eliminar una aula
+    Route::get('/aulas', [AulaController::class, 'index'])->name('aulas.index');     
+    Route::get('/aulas/create', [AulaController::class, 'create'])->name('aulas.create');   
+    Route::post('/aulas', [AulaController::class, 'store'])->name('aulas.store');    
+    Route::get('/aulas/{aula}', [AulaController::class, 'show'])->name('aulas.show');    
+    Route::get('/aulas/{aula}/edit', [AulaController::class, 'edit'])->name('aulas.edit');     
+    Route::put('/aulas/{aula}', [AulaController::class, 'update'])->name('aulas.update');    
+    Route::delete('/aulas/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');     
 
 });

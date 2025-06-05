@@ -20,9 +20,10 @@
         <img src="{{ asset('images/portada.jpg') }}" alt="Portada" class="hero-image">
 
         @auth
-            <a class="btn btn-success hero-button" href="{{ route('admin.panel') }}">
+            <a class="btn btn-success hero-button mt-5" href="{{ route('admin.panel') }}">
                 Panel de Administración
             </a>
+
         @endauth
     </div>
 </div>

@@ -15,7 +15,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-bordered align-middle">
+        <table class="table table-bordered align-middle datatable">
             <thead class="table-light">
                 <tr>
                     <th>Equipo</th>
@@ -46,18 +46,21 @@
                         <td>{{ $averia->fecha_resolucion ?? 'Pendiente' }}</td>
                         <td>
                             <div class="d-flex flex-column flex-sm-row gap-1">
-                                <a href="{{ route('averias.edit', $averia->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                <a href="{{ route('averias.edit', $averia->id) }}" class="btn btn-sm btn-warning">
+                                    <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
+                                </a>
                                 
                                 <form action="{{ route('averias.destroy', $averia->id) }}" method="POST"
                                       onsubmit="return confirm('¿Estás seguro de eliminar esta avería?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                    <button class="btn btn-sm btn-danger">
+                                        <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Borrar
+                                    </button>
                                 </form>
 
                                 @if($averia->estado !== 'Resuelto')
-                                    <form action="{{ route('averias.finalizar', $averia->id) }}" method="POST"
-                                          onsubmit="return confirm('¿Finalizar esta avería?')">
+                                    <form action="{{ route('averias.finalizar', $averia->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-success">Finalizar</button>
                                     </form>
@@ -74,3 +77,9 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush
+
+

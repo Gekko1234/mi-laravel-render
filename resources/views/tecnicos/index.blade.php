@@ -17,7 +17,7 @@
     @endif
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table table-striped table-bordered align-middle datatable">
             <thead class="table-light">
                 <tr>
                     <th>Nombre</th>
@@ -36,12 +36,16 @@
                         <td>{{ $tecnico->contacto }}</td>
                         @if(Auth::user()->es_admin)
                             <td class="text-center">
-                                <a href="{{ route('tecnicos.edit', $tecnico->id) }}" class="btn btn-sm btn-warning me-1">Editar</a>
+                                <a href="{{ route('tecnicos.edit', $tecnico->id) }}" class="btn btn-sm btn-warning me-1">
+                                    <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
+                                </a>
                                 <form action="{{ route('tecnicos.destroy', $tecnico->id) }}" method="POST" class="d-inline"
                                       onsubmit="return confirm('¿Estás seguro de eliminar este técnico?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Borrar
+                                    </button>
                                 </form>
                             </td>
                         @endif
@@ -56,3 +60,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush

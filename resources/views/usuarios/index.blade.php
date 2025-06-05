@@ -1,18 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de Usuarios')
+@section('title', 'Usuarios')
 
 @section('content')
+<h1 class="text-center mt-4">Lista de Usuarios</h1>
+
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Usuarios Registrados</h2>
+
+    @if(Auth::user()->es_admin)
+        <div class="d-flex mb-3">
+            <a href="{{ route('usuarios.create') }}" class="btn btn-success">Agregar Nuevo Usuario</a>
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table table-striped table-bordered align-middle datatable">
             <thead class="table-light">
                 <tr>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th class="text-center">Ficha</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +32,7 @@
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
                         <td class="text-center">
-                            <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-info btn-sm">
+                            <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-sm btn-info">
                                 Ficha de usuario
                             </a>
                         </td>
@@ -36,3 +47,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush

@@ -89,18 +89,16 @@ class EquipoController extends Controller
         return redirect()->route('equipo.index')->with('success', 'Equipo eliminado correctamente.');
     }
 
-    // Ver las averias del equipo
     public function verAverias(Equipo $equipo)
-    {
-        $desde = Carbon::now()->subMonth(); // Últimos 30 días
+{
+    // Trae todas las averías sin filtro de fecha para que el filtro se haga en el frontend
+    $averias = $equipo->averias()
+        ->orderByDesc('fecha_creacion')
+        ->get();
 
-        $averias = $equipo->averias()
-            ->where('fecha_creacion', '>=', $desde)
-            ->orderByDesc('fecha_creacion')
-            ->get();
+    return view('equipo.averias', compact('equipo', 'averias'));
+}
 
-        return view('equipo.averias', compact('equipo', 'averias'));
-    }
 
     // Descargar el pdf del equipo
     public function descargarAveriasPdf($equipoId)

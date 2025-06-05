@@ -11,8 +11,8 @@
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-
-        <table class="table table-bordered">
+        <div class="table-responsive">
+        <table class="table table-bordered datatable">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -27,17 +27,26 @@
                             <a href="{{ route('aulas.show', $aula->id) }}">{{ $aula->nombre }}</a>
                         </td>
                         <td>{{ $aula->planta }}</td>
-                        <td>
+                        <td class="text-center">
                             <form action="{{ route('aulas.destroy', $aula->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta aula?')">Eliminar</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta aula?')">
+                                    <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Borrar
+                                </button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        </div>
         <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush
+

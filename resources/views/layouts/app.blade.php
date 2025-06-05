@@ -11,8 +11,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS propio -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     @yield('head')
-    <!-- Otros estilos o scripts -->
 </head>
 
 <head>
@@ -37,26 +38,35 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     @auth
                         <li class="nav-item d-flex align-items-center">
-                            <span class="nav-link disabled text-light mb-0">| {{ Auth::user()->name }} |</span>
+                            <span class="nav-link disabled text-light mb-0">
+                                <img src="{{ asset('images/usuario.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">
+                                {{ Auth::user()->name }}
+                            </span>
                         </li>                    
                         @if(Auth::user()->es_admin || Auth::user()->cargo === 'Profesor')
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="{{ route('admin.panel') }}">Panel de Administración</a>
+                                <a class="nav-link text-light" href="{{ route('admin.panel') }}">
+                                    <img src="{{ asset('images/administracion.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">Panel de Administración</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="{{ route('aulas.mapa') }}">Ver mapa de aulas</a>
+                                <a class="nav-link text-light" href="{{ route('aulas.mapa') }}">
+                                    <img src="{{ asset('images/mapa.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">Ver mapa de aulas</a>
                             </li>
                         @endif
 
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-link nav-link text-light">Cerrar sesión</button>
+                                <button type="submit" class="btn btn-link nav-link text-light">                                
+                                    <img src="{{ asset('images/cerrar-sesion.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">Cerrar sesión
+                                </button>
                             </form>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('login') }}">Iniciar sesión</a>
+                            <a class="nav-link text-light" href="{{ route('login') }}">
+                                <img src="{{ asset('images/iniciar-sesion.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">Iniciar sesión
+                            </a>
                         </li>
                     @endauth
                 </ul>
@@ -73,7 +83,15 @@
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- jQuery (requerido por DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+
     <!-- Scripts adicionales desde Blade hijo -->
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

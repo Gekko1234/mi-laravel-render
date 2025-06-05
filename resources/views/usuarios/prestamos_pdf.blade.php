@@ -14,21 +14,24 @@
         <table>
             <thead>
                 <tr>
+                    <th>Observaciones</th>
                     <th>Equipo</th>
                     <th>Fecha de Préstamo</th>
                     <th>Fecha de Devolución</th>
-                    <th>Observaciones</th>
-                    <th>Estado</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 @foreach ($prestamos as $prestamo)
                     <tr>
+                        <td>
+                            <div style="width: 200px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">
+                                {{ $prestamo->observaciones ?? 'N/A' }}
+                            </div>
+                        </td>  
                         <td>{{ $prestamo->equipo->nombre }}</td>
                         <td>{{ \Carbon\Carbon::parse($prestamo->fecha_prestamo)->format('d/m/Y') }}</td>
-                        <td>{{ $prestamo->fecha_devolucion ? \Carbon\Carbon::parse($prestamo->fecha_devolucion)->format('d/m/Y') : 'No devuelto' }}</td>
-                        <td>{{ $prestamo->observaciones ?? 'N/A' }}</td>
-                        <td>{{ $prestamo->estado === 'Sin prestar' ? 'Finalizado' : $prestamo->estado }}</td>
+                        <td>{{ $prestamo->fecha_devolucion ? \Carbon\Carbon::parse($prestamo->fecha_devolucion)->format('d/m/Y') : 'No devuelto' }}</td>                    
                     </tr>
                 @endforeach
             </tbody>

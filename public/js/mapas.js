@@ -35,6 +35,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
+
+        // Paginación para cada lista de equipos
+        const equiposList = marker.querySelector('.equipos-list');
+        if (equiposList) {
+            const ul = equiposList.querySelector('ul');
+            const items = ul ? ul.querySelectorAll('li') : [];
+            const paginacion = document.createElement('div');
+            paginacion.className = 'paginacion mt-2';
+            equiposList.appendChild(paginacion);
+
+            const itemsPerPage = 10;
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            let currentPage = 1;
+
+            function showPage(page) {
+                items.forEach((item, i) => {
+                    item.style.display = (i >= (page - 1) * itemsPerPage && i < page * itemsPerPage) ? 'list-item' : 'none';
+                });
+
+                paginacion.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.textContent = i;
+                    btn.className = 'btn btn-sm btn-outline-primary me-1';
+                    if (i === page) btn.classList.add('active');
+
+                    btn.addEventListener('click', () => {
+                        currentPage = i;
+                        showPage(currentPage);
+                    });
+
+                    paginacion.appendChild(btn);
+                }
+            }
+
+            if (items.length > itemsPerPage) {
+                showPage(currentPage);
+            }
+        }
     });
 
     updateMapa();

@@ -36,7 +36,6 @@ class PrestamoController extends Controller
         $validated = $request->validate([
             'equipo_id' => 'required|exists:equipos,id',
             'user_id' => 'required|exists:users,id',
-            // Puedes quitar la validación de fecha_prestamo si la manejas aquí
             'observaciones' => 'nullable|string',
         ]);
 
@@ -123,9 +122,9 @@ class PrestamoController extends Controller
         $fechaInicio = Carbon::now()->subMonth();
 
         $prestamos = $usuario->prestamos()
-            ->where('fecha_prestamo', '>=', $fechaInicio)
             ->orderBy('fecha_prestamo', 'desc')
             ->get();
+
 
         return view('usuarios.prestamos', compact('usuario', 'prestamos'));
     }
@@ -135,10 +134,7 @@ class PrestamoController extends Controller
     {
         $usuario = User::findOrFail($userId);
 
-        $fechaInicio = Carbon::now()->subMonth();
-
         $prestamos = $usuario->prestamos()
-            ->where('fecha_prestamo', '>=', $fechaInicio)
             ->orderBy('fecha_prestamo', 'desc')
             ->get();
 

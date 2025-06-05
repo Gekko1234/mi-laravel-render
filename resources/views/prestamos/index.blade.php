@@ -11,7 +11,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table table-striped table-bordered align-middle datatable">
             <thead class="table-light">
                 <tr>
                     <th>Usuario</th>
@@ -39,15 +39,18 @@
                         <td>{{ $prestamo->equipo->nombre }}</td>
                         <td>{{ $prestamo->fecha_prestamo }}</td>
                         <td>{{ $prestamo->fecha_devolucion ?? 'No devuelto' }}</td>
-                        <td>{{ $prestamo->observaciones ?? 'N/A' }}</td>
+                        <td>{{ Str::limit($prestamo->observaciones, 40) }}</td>
                         <td><span class="badge bg-{{ $badgeClass }}">{{ $estadoTexto }}</span></td>
-                        <td class="text-center">
-                            <a href="{{ route('prestamos.edit', $prestamo->id) }}" class="btn btn-sm btn-primary me-1">Editar</a>
-
+                        <td>
+                            <a href="{{ route('prestamos.edit', $prestamo->id) }}" class="btn btn-sm btn-warning me-11">
+                                <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
+                            </a>
                             <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este préstamo?')">Eliminar</button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este préstamo?')">
+                                    <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Borrar
+                                </button>
                             </form>
 
                             @if($prestamo->estado === 'Prestado')
@@ -68,3 +71,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/datatables-config.js') }}"></script>
+@endpush

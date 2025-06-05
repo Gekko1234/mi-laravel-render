@@ -11,11 +11,21 @@
         </a>
     </h1>
 
+    <div class="mb-3">
+        <label for="filtroTiempo" class="form-label">Filtrar por periodo:</label>
+        <select id="filtroTiempo" class="form-select" style="max-width: 250px;">
+            <option value="7">Última semana</option>
+            <option value="30" selected>Último mes</option>
+            <option value="365">Último año</option>
+            <option value="0">Todos</option>
+        </select>
+    </div>
+
     @if ($prestamos->isEmpty())
-        <div class="alert alert-info">No hay préstamos registrados para este usuario en el último mes.</div>
+        <div class="alert alert-info">No hay préstamos registrados para este usuario.</div>
     @else
         <div class="table-responsive">
-            <table class="table table-striped table-bordered align-middle">
+            <table id="tablaPrestamos" class="table table-striped table-bordered align-middle datatable">
                 <thead class="table-light">
                     <tr>
                         <th>Equipo</th>
@@ -31,7 +41,11 @@
                             <td>{{ $prestamo->equipo->nombre }}</td>
                             <td>{{ \Carbon\Carbon::parse($prestamo->fecha_prestamo)->format('d/m/Y') }}</td>
                             <td>{{ $prestamo->fecha_devolucion ? \Carbon\Carbon::parse($prestamo->fecha_devolucion)->format('d/m/Y') : 'No devuelto' }}</td>
-                            <td>{{ $prestamo->observaciones ?? 'N/A' }}</td>
+                            <td>
+                                <div style="max-width: 200px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">
+                                    {{ $prestamo->observaciones ?? 'N/A' }}
+                                </div>
+                            </td>
                             <td>{{ $prestamo->estado === 'Sin prestar' ? 'Finalizado' : $prestamo->estado }}</td>
                         </tr>
                     @endforeach
@@ -40,6 +54,10 @@
         </div>
     @endif
 
-    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    <a href="{{ route('prestamos.index') }}" class="btn btn-secondary mt-3">Volver</a>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/time-filter-prestamos.js') }}"></script>
+@endpush

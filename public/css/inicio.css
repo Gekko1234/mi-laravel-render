@@ -21,3 +21,11 @@
     font-size: 24px;
     z-index: 10;
 }
+
+  @media (max-width: 767px) {
+    .hero-image {
+      display: none;
+    }
+  }
+
+
