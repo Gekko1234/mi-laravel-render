@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@push('head')
+@section('head')
 <link rel="stylesheet" href="{{ asset('css/mapas.css') }}">
-@endpush
+@endsection
 
 @section('content')
 <div class="container">
@@ -38,8 +38,19 @@
 
         <div class="mb-3">
             <label class="form-label">Haz clic en el mapa para seleccionar la posición del aula:</label>
-            <div id="mapaClick" class="mapa-container">
+            {{-- <div id="mapaClick" class="mapa-container">
                 <img src="{{ asset('images/plano-planta0.jpg') }}" class="mapa-planta visible" alt="Mapa planta 0" id="mapaImagen">
+            </div> --}}
+            <div id="mapaClick" class="mapa-container">
+                @foreach ([0,1,2] as $planta)
+                    <img
+                        src="{{ asset("images/plano-planta{$planta}.jpg") }}"
+                        alt="Mapa planta {{ $planta }}"
+                        class="mapa-planta {{ $planta === 0 ? 'visible' : '' }}"
+                        data-planta="{{ $planta }}"
+                        style="width: 100%; height: auto;"
+                    >
+                @endforeach
             </div>
         </div>
 

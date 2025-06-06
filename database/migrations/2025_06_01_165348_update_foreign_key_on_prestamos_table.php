@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::table('prestamos', function (Blueprint $table) {
             $table->dropForeign(['equipo_id']);
-            // Restaurar la FK anterior sin cascade, si quieres
+            // Restaurar la FK anterior sin cascade
             $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('restrict');
         });
     }
