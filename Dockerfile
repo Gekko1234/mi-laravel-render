@@ -1,18 +1,41 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+FROM php:8.2-fpm
 
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    nginx \
+    git \
+    unzip \
+    libonig-dev \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install pdo_mysql mbstring zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Configurar directorio de trabajo
+WORKDIR /var/www/html
+
+# Copiar archivos de la aplicación
 COPY . .
 
-# Configuraciones del contenedor
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
+# Instalar dependencias de producción
+RUN composer install --optimize-autoloader --no-dev
 
-# Configuraciones de Laravel
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-ENV COMPOSER_ALLOW_SUPERUSER 1
+# Configurar permisos (esto debe hacerse ANTES de las operaciones de caché)
+RUN mkdir -p storage/framework/{sessions,views,cache} \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
 
-CMD ["/start.sh"]
+# Configuración de Nginx
+COPY ./nginx.conf /etc/nginx/sites-available/default
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+# Puerto expuesto
+EXPOSE 8080
+
+# Comando de inicio (mejorado)
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
