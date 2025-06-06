@@ -1,41 +1,42 @@
-FROM php:8.2-fpm
+# Imagen base con PHP, Composer y extensiones necesarias
+FROM php:8.2-cli
 
-# Instalar dependencias del sistema
+# Instala dependencias del sistema y extensiones PHP requeridas
 RUN apt-get update && apt-get install -y \
-    nginx \
-    git \
     unzip \
-    libonig-dev \
     libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libxml2-dev \
     zip \
-    && docker-php-ext-install pdo_mysql mbstring zip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    git \
+    curl \
+    nodejs \
+    npm && \
+    docker-php-ext-install pdo pdo_mysql zip gd
 
-# Instalar Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Instala Composer globalmente
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Configurar directorio de trabajo
-WORKDIR /var/www/html
+# Crea y establece directorio de trabajo
+WORKDIR /var/www
 
-# Copiar archivos de la aplicación
+# Copia todos los archivos del proyecto al contenedor
 COPY . .
 
-# Instalar dependencias de producción
-RUN composer install --optimize-autoloader --no-dev
+# Instala dependencias PHP
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Configurar permisos (esto debe hacerse ANTES de las operaciones de caché)
-RUN mkdir -p storage/framework/{sessions,views,cache} \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache
+# Genera la clave de la app si no existe (solo si hay .env)
+RUN if [ -f ".env" ]; then php artisan key:generate; fi
 
-# Configuración de Nginx
-COPY ./nginx.conf /etc/nginx/sites-available/default
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+# Compila assets con Vite si hay package.json
+RUN if [ -f "package.json" ]; then npm install && npm run build; fi
 
-# Puerto expuesto
+# Expone el puerto que Laravel usa
 EXPOSE 8080
 
-# Comando de inicio (mejorado)
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Comando por defecto para iniciar el servidor Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
