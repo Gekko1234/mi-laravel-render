@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('head')
+@push('head')
     <link rel="stylesheet" href="{{ asset('css/mapas.css') }}">
-@endsection
+@endpush
 
 @section('title', 'Mapa de Aulas')
 
