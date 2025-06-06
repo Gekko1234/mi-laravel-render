@@ -31,7 +31,7 @@
                 @foreach ($averias as $averia)
                     <tr>
                         <td>
-                            <a href="{{ route('equipos.averias', $averia->equipo->id) }}">
+                            <a href="{{ route('equipos.averias', $averia->equipo->id) }}" class="enlace-sin-estilo">
                                 {{ $averia->equipo->nombre }}
                             </a>
                         </td>
@@ -45,34 +45,40 @@
                         <td>{{ $averia->fecha_creacion ? $averia->fecha_creacion->format('d/m/Y') : '—' }}</td>
                         <td>{{ $averia->fecha_resolucion ?? 'Pendiente' }}</td>
                         <td>
-                            <div class="d-flex flex-column flex-sm-row gap-1">
-                                <a href="{{ route('averias.edit', $averia->id) }}" class="btn btn-sm btn-warning">
-                                    <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a href="{{ route('averias.edit', $averia->id) }}" class="btn btn-sm btn-warning d-flex align-items-center">
+                                    <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">
+                                    Editar
                                 </a>
-                                
+                        
                                 <form action="{{ route('averias.destroy', $averia->id) }}" method="POST"
                                       onsubmit="return confirm('¿Estás seguro de eliminar esta avería?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Borrar
+                                    <button class="btn btn-sm btn-danger d-flex align-items-center">
+                                        <img src="{{ asset('images/marca-x.png') }}" alt="Borrar" style="width: 15px; height: 15px; margin-right: 5px;">
+                                        Borrar
                                     </button>
                                 </form>
-
+                        
                                 @if($averia->estado !== 'Resuelto')
                                     <form action="{{ route('averias.finalizar', $averia->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-success">Finalizar</button>
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <img src="{{ asset('images/tick.png') }}" alt="Borrar" style="width: 15px; height: 15px; margin-right: 5px;">Acabar
+                                        </button>
                                     </form>
                                 @endif
                             </div>
-                        </td>
+                        </td>                        
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="mt-3">
-            <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+            <a href="{{ route('admin.panel') }}" class="btn btn-secondary mb-3">
+                <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+            </a>
         </div>
     </div>
 </div>

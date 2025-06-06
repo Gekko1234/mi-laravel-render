@@ -12,7 +12,9 @@
         <div class="alert alert-danger">
             Web exclusiva para profesores y personal autorizado del centro.
         </div>
-        <a href="{{ route('login') }}" class="btn btn-primary mt-3">Volver al inicio de sesión</a>
+        <a href="{{ route('login') }}" class="btn btn-primary mt-3">
+            <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver al inicio de sesión
+        </a>
     </div>
 </body>
 </html>

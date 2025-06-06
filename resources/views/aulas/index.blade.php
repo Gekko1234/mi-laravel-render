@@ -24,7 +24,7 @@
                 @foreach ($aulas as $aula)
                     <tr>
                         <td>
-                            <a href="{{ route('aulas.show', $aula->id) }}">{{ $aula->nombre }}</a>
+                            <a href="{{ route('aulas.show', $aula->id) }}" class="enlace-sin-estilo">{{ $aula->nombre }}</a>
                         </td>
                         <td>{{ $aula->planta }}</td>
                         <td class="text-center">
@@ -41,7 +41,9 @@
             </tbody>
         </table>
         </div>
-        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('admin.panel') }}" class="btn btn-secondary mb-3">
+            <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+        </a>
     </div>
 @endsection
 

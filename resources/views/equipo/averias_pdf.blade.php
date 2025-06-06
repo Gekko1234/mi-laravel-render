@@ -12,7 +12,7 @@
     @if ($averias->isEmpty())
         <p>No hay averías registradas en el último mes.</p>
     @else
-        <table class="table table-striped table-bordered datatable">
+        <table class="table table-striped table-bordered datatable" border="1px solid">
             <thead>
                 <tr>
                     <th>Descripción</th>

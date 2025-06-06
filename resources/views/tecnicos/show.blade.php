@@ -12,7 +12,9 @@
                 <p><strong>Especialidad:</strong> {{ $tecnico->especialidad }}</p>
                 <p><strong>Contacto:</strong> {{ $tecnico->contacto }}</p>
 
-                <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary">Volver</a>
+                <a href="{{ route('tecnicos.index') }}" class="btn btn-secondary mb-3">
+                    <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+                </a>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-3">
         <div class="card-body">
             <form method="POST" action="{{ route('usuarios.store') }}">
                 @csrf
@@ -73,7 +73,9 @@
 
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-success">Crear Usuario</button>
-                    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Volver</a>
+                    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">
+                        <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+                    </a>
                 </div>
             </form>
         </div>

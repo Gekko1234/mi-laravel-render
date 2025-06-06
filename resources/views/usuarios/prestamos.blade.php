@@ -53,8 +53,12 @@
             </table>
         </div>
     @endif
-
-    <a href="{{ route('prestamos.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    
+    <div class="mb-3">
+        <a href="{{ route('prestamos.index') }}" class="btn btn-secondary mt-3">
+            <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+        </a>
+    </div>
 </div>
 @endsection
 

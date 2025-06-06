@@ -53,8 +53,12 @@
             <input type="number" name="pos_y" id="pos_y" class="form-control" readonly required value="{{ old('pos_y') }}">
         </div>
 
-        <button type="submit" class="btn btn-success">Guardar Aula</button>
-        <a href="{{ route('aulas.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Guardar Aula</button>
+            <a href="{{ route('aulas.index') }}" class="btn btn-secondary">
+                <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+            </a>
+        </div>
     </form>
 </div>
 

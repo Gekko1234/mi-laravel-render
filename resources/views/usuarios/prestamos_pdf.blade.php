@@ -11,7 +11,7 @@
     @if ($prestamos->isEmpty())
         <p>No hay préstamos registrados en el último mes.</p>
     @else
-        <table>
+        <table border="1px solid">
             <thead>
                 <tr>
                     <th>Observaciones</th>

@@ -18,7 +18,7 @@
                     <th>Equipo</th>
                     <th>Fecha de Préstamo</th>
                     <th>Fecha de Devolución</th>
-                    <th>Observaciones</th>
+                    <th>Detalles</th>
                     <th>Estado</th> 
                     <th class="text-center">Acciones</th>
                 </tr>
@@ -32,34 +32,42 @@
                     @endphp
                     <tr>
                         <td>
-                            <a href="{{ route('usuarios.prestamos', $prestamo->user->id) }}">
+                            <a href="{{ route('usuarios.prestamos', $prestamo->user->id) }}" class="enlace-sin-estilo">
                                 {{ $prestamo->user->name }}
                             </a>
                         </td>
                         <td>{{ $prestamo->equipo->nombre }}</td>
                         <td>{{ $prestamo->fecha_prestamo }}</td>
                         <td>{{ $prestamo->fecha_devolucion ?? 'No devuelto' }}</td>
-                        <td>{{ Str::limit($prestamo->observaciones, 40) }}</td>
+                        <td>{{ Str::limit($prestamo->observaciones, 20) }}</td>
                         <td><span class="badge bg-{{ $badgeClass }}">{{ $estadoTexto }}</span></td>
                         <td>
-                            <a href="{{ route('prestamos.edit', $prestamo->id) }}" class="btn btn-sm btn-warning me-11">
-                                <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Editar
-                            </a>
-                            <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este préstamo?')">
-                                    <img src="{{ asset('images/marca-x.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">Borrar
-                                </button>
-                            </form>
-
-                            @if($prestamo->estado === 'Prestado')
-                                <form action="{{ route('prestamos.finalizar', $prestamo->id) }}" method="POST" class="d-inline">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a href="{{ route('prestamos.edit', $prestamo->id) }}" class="btn btn-sm btn-warning d-flex align-items-center">
+                                    <img src="{{ asset('images/editar.png') }}" alt="Editar" style="width: 20px; height: 20px; margin-right: 5px;">
+                                    Editar
+                                </a>
+                        
+                                <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este préstamo?')">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-success">Finalizar</button>
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger d-flex align-items-center">
+                                        <img src="{{ asset('images/marca-x.png') }}" alt="Borrar" style="width: 20px; height: 20px; margin-right: 5px;">
+                                        Borrar
+                                    </button>
                                 </form>
-                            @endif
+                        
+                                @if($prestamo->estado === 'Prestado')
+                                    <form action="{{ route('prestamos.finalizar', $prestamo->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <img src="{{ asset('images/tick.png') }}" alt="Borrar" style="width: 15px; height: 15px; margin-right: 5px;">Acabar
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
                         </td>
+                                              
                     </tr>
                 @endforeach
             </tbody>
@@ -67,7 +75,9 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('admin.panel') }}" class="btn btn-secondary mb-3">
+            <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+        </a>
     </div>
 </div>
 @endsection

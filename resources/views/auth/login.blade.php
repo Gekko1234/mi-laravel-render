@@ -28,7 +28,9 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Entrar</button>
+                            <button type="submit" class="btn btn-primary">
+                                <img src="{{ asset('images/iniciar-sesion.png') }}" alt="Usuario" style="width: 20px; height: 20px; margin-right: 5px;">Entrar
+                            </button>
                         </div>
                     </form>
                 </div>

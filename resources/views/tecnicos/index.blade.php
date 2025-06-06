@@ -56,7 +56,9 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.panel') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('admin.panel') }}" class="btn btn-secondary mb-3">
+            <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+        </a>
     </div>
 </div>
 @endsection

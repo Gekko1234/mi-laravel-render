@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const porcentajeX = clickX / renderWidth;
         const porcentajeY = clickY / renderHeight;
 
-        // Guardamos coordenadas relativas al mapa original
+        // Guardo coordenadas relativas al mapa original
         inputX.value = Math.round(porcentajeX * mapWidth);
         inputY.value = Math.round(porcentajeY * mapHeight);
 

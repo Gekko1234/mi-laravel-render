@@ -44,7 +44,9 @@
         </tbody>
     </table>
 
-    <a href="{{ route('averias.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    <a href="{{ route('averias.index') }}" class="btn btn-secondary mt-3 ">
+        <img src="{{ asset('images/volver.png') }}" alt="Editar" style="width: 15px; height: 15px; margin-right: 5px;">Volver
+    </a>
 </div>
 @endsection
 

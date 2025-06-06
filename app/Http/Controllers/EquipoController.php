@@ -91,7 +91,6 @@ class EquipoController extends Controller
 
     public function verAverias(Equipo $equipo)
 {
-    // Trae todas las averías sin filtro de fecha para que el filtro se haga en el frontend
     $averias = $equipo->averias()
         ->orderByDesc('fecha_creacion')
         ->get();
